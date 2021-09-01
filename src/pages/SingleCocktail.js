@@ -1,101 +1,95 @@
 import React, { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import { useParams, Link } from "react-router-dom";
-const url = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
+const url = "https://www.breakingbadapi.com/api/characters/";
 
 const SingleCocktail = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
-  const [cocktail, setCocktail] = useState(null);
+  const [characters, setCharacters] = useState(null);
+
 
   useEffect(() => {
     setLoading(true);
-    const getCocktail = async () => {
+    const getCharacter = async () => {
       try {
         const response = await fetch(`${url}${id}`);
         const data = await response.json();
-        if (data.drinks) {
+        if (data) {
+          console.log(data[0])
+          
           const {
-            strDrink: name,
-            strDrinkThumb: image,
-            strAlcoholic: info,
-            strCategory: category,
-            strGlass: glass,
-            strInstructions: instructions,
-            strIngredient1,
-            strIngredient2,
-            strIngredient3,
-            strIngredient4,
-            strIngredient5,
-          } = data.drinks[0];
-          const ingredients = [
-            strIngredient1,
-            strIngredient2,
-            strIngredient3,
-            strIngredient4,
-            strIngredient5,
-          ];
-          const newCocktail = {
+            char_id,
             name,
-            image,
-            info,
-            category,
-            glass,
-            instructions,
-            ingredients,
+            birthday,
+            img,
+            nickname,
+            appearance,
+            portrayed,
+          } = data[0];
+          const newCharacter = {
+            char_id,
+            name,
+            birthday,
+            img,
+            nickname,
+            appearance,
+            portrayed,
           };
-          setCocktail(newCocktail)
+          setCharacters(newCharacter);
         } else {
-          setCocktail(null);
+          setCharacters(null);
         }
         setLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
-    getCocktail();
+    getCharacter();
   }, [id]);
-  if(loading) {
-    return (
-      <Loading />
-    )
+  if (loading) {
+    return <Loading />;
   }
-  if (!cocktail) {
-    return <h2>No Cocktail to Display</h2>
+  if (!characters) {
+    return <h2>No person to display</h2>;
   }
-  const {name, image, category, info, glass, instructions, ingredients} = cocktail
+
+  const {name, birthday, img, nickname, appearance, portrayed } =
+    characters;
+
   return (
-    <section className='section cocktail-section'>
-      <Link to='/' className='btn btn-primary'>
-        Back Home?
-      </Link>
+    <section className="section cocktail-section">
+      <h2 className="section-title">{name}</h2>
       <div className="drink">
-        <img src={image} alt="" />
+        <img src={img} alt="" />
         <div className="drink-info">
           <p>
-            <span className='drink-data'>name:</span>{name}
+            <span className="drink-data">name:</span>
+            {name}
           </p>
           <p>
-            <span className='drink-data'>category:</span>{category}
+            <span className="drink-data">nickname:</span>
+            {nickname}
           </p>
           <p>
-            <span className='drink-data'>info:</span>{info}
+            <span className="drink-data">birthday:</span>
+            {birthday}
           </p>
           <p>
-            <span className='drink-data'>glass:</span>{glass}
+            <span className="drink-data">portrayed by:</span>
+            {portrayed}
           </p>
+
           <p>
-            <span className='drink-data'>instructions:</span>{instructions}
-          </p>
-          <p>
-            <span className='drink-data'>ingredients</span>
-            {ingredients.map((item, index) => {
-              return item ? <span key={index}>{item}</span> : null
-            })}
+            <span className="drink-data">appears in seasons:</span>
+            {appearance.join(", ")}
           </p>
         </div>
       </div>
-      <h2 className="section-title">{name}</h2>
+
+      <Link to="/" className="btn btn-primary">
+        Back Home?
+      </Link>
     </section>
   );
 };

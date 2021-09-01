@@ -1,35 +1,37 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useCallback } from "react";
 
-const url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
+const url = "https://www.breakingbadapi.com/api/characters?name=";
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("a");
-  const [cocktails, setCocktails] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [characters, setCharacters] = useState([]);
 
-  const fetchDrinks = useCallback(async () => {
+  const fetchCharacters = useCallback(async () => {
     setLoading(true);
     try {
       const response = await fetch(`${url}${searchTerm}`);
       const data = await response.json();
-      const { drinks } = data;
-      if (drinks) {
-        const newCocktails = drinks.map((item) => {
-          const { idDrink, strDrink, strDrinkThumb, strAlcoholic, strGlass } =
+  
+      if (data) {
+        const searchedCharacters = data.map((item) => {
+          const { char_id, name, birthday, img, nickname, appearance, portrayed } =
             item;
           return {
-            id: idDrink,
-            name: strDrink,
-            image: strDrinkThumb,
-            info: strAlcoholic,
-            glass: strGlass,
+            id: char_id,
+            name: name,
+            birthday: birthday,
+            image: img,
+            nickname: nickname,
+            appearance: appearance,
+            portrayed: portrayed
           };
         });
-        setCocktails(newCocktails);
+        setCharacters(searchedCharacters);
       } else {
-        setCocktails([]);
+        setCharacters([]);
       }
       setLoading(false);
     } catch (error) {
@@ -39,11 +41,11 @@ const AppProvider = ({ children }) => {
   }, [searchTerm]);
 
   useEffect(() => {
-    fetchDrinks();
-  }, [searchTerm, fetchDrinks]);
+    fetchCharacters();
+  }, [searchTerm, fetchCharacters]);
 
   return (
-    <AppContext.Provider value={{ loading, setSearchTerm, cocktails }}>
+    <AppContext.Provider value={{ loading, setSearchTerm, cocktails: characters }}>
       {children}
     </AppContext.Provider>
   );
