@@ -8,6 +8,7 @@ const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [characters, setCharacters] = useState([]);
+  const [redirect, setRedirect] = useState(false)
 
   const fetchCharacters = useCallback(async () => {
     setLoading(true);
@@ -30,6 +31,8 @@ const AppProvider = ({ children }) => {
           };
         });
         setCharacters(searchedCharacters);
+        console.log(searchedCharacters);
+        
       } else {
         setCharacters([]);
       }
@@ -45,7 +48,7 @@ const AppProvider = ({ children }) => {
   }, [searchTerm, fetchCharacters]);
 
   return (
-    <AppContext.Provider value={{ loading, setSearchTerm, cocktails: characters }}>
+    <AppContext.Provider value={{ loading, setSearchTerm, characters, redirect, setRedirect }}>
       {children}
     </AppContext.Provider>
   );

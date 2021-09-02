@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import { useParams, Link } from "react-router-dom";
+import { useGlobalContext } from "../context";
 const url = "https://www.breakingbadapi.com/api/characters/";
 
-const SingleCocktail = () => {
+const SingleCharacter = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [characters, setCharacters] = useState(null);
+  const {redirect, setRedirect} = useGlobalContext()
+
+  useEffect(() => {
+    setRedirect(false);
+  }, []);
 
 
   useEffect(() => {
@@ -60,44 +66,44 @@ const SingleCocktail = () => {
     characters;
 
   return (
-    <section className="section cocktail-section">
+    <section className="section character-section">
       <h2 className="section-title">{name}</h2>
-      <div className="drink">
+      <div className="person">
         <img src={img} alt="" />
-        <div className="drink-info">
+        <div className="person-info">
           <p>
-            <span className="drink-data">name:</span>
+            <span className="person-data">name:</span>
             {name}
           </p>
           <p>
-            <span className="drink-data">nickname:</span>
+            <span className="person-data">nickname:</span>
             {nickname}
           </p>
           <p>
-            <span className="drink-data">occupation:</span>
+            <span className="person-data">occupation:</span>
             {occupation.join(', ')}
           </p>
           <p>
-            <span className="drink-data">birthday:</span>
+            <span className="person-data">birthday:</span>
             {birthday}
           </p>
           <p>
-            <span className="drink-data">portrayed by:</span>
+            <span className="person-data">portrayed by:</span>
             {portrayed}
           </p>
 
           <p>
-            <span className="drink-data">appears in seasons:</span>
+            <span className="person-data">appears in seasons:</span>
             {appearance.join(", ")}
           </p>
         </div>
       </div>
 
-      <Link to="/" className="btn btn-primary">
+      <Link to="/" className="btn">
         Back Home?
       </Link>
     </section>
   );
 };
 
-export default SingleCocktail;
+export default SingleCharacter;

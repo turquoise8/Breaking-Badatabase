@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Cocktail = ({ id, image, name }) => {
+const Character = ({ id, image, name }) => {
   return (
     <article className="">
-      <Link to={`/characters/${id}`} className="cocktail">
+      <Link to={`/characters/${id}`} className="character">
         <div className="img-container">
           <img src={image} alt="" />
         </div>
-        <div className="cocktail-footer">
+        <div className="character-footer">
           <h3>{name}</h3>
           <a href="" className="btn-primary">
             Details
@@ -19,4 +19,4 @@ const Cocktail = ({ id, image, name }) => {
   );
 };
 
-export default Cocktail;
+export default Character;

@@ -1,29 +1,42 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { FaWindows } from "react-icons/fa";
 import { useGlobalContext } from "../context";
+import { Redirect } from "react-router";
 
-const SearchForm = () => {
-  const { setSearchTerm } = useGlobalContext();
-  const searchValue = React.useRef("");
+const SearchForm = ({searchValue}) => {
+  const { setSearchTerm, redirect, setRedirect } = useGlobalContext();
 
-  React.useEffect(() => {
-    searchValue.current.focus()
-  }, [])
+  useEffect(() => {
+    searchValue.current.focus();
+  }, []);
 
-  const searchCocktail = () => {
-    setSearchTerm(searchValue.current.value)
-  }
+  const searchCharacter = () => {
+    setSearchTerm(searchValue.current.value);
+  };
 
   const handleSubmit = (e) => {
-    e.prevent.default()
-  }
+    e.preventDefault();
+    setRedirect(true);
+  };
+
   return (
-    <section className="">
-      <form className="search-form" onSubmit={handleSubmit}>
-        <div className="form-control">
-          <input type="text" id='name' ref={searchValue} onChange={searchCocktail} placeholder="Search" />
-        </div>
-      </form>
-    </section>
+    <>
+      {redirect && (
+      <Redirect to="/" />)}
+      <section className="">
+        <form className="search-form" onSubmit={handleSubmit}>
+          <div className="form-control">
+            <input
+              type="text"
+              id="name"
+              ref={searchValue}
+              onChange={searchCharacter}
+              placeholder="Search"
+            />
+          </div>
+        </form>
+      </section>
+    </>
   );
 };
 
