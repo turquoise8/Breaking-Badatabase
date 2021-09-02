@@ -17,11 +17,10 @@ const SearchForm = () => {
     e.prevent.default()
   }
   return (
-    <section className="section search">
+    <section className="">
       <form className="search-form" onSubmit={handleSubmit}>
         <div className="form-control">
-          <label htmlFor="name">Search your favorite Cocktail</label>
-          <input type="text" id='name' ref={searchValue} onChange={searchCocktail} />
+          <input type="text" id='name' ref={searchValue} onChange={searchCocktail} placeholder="Search" />
         </div>
       </form>
     </section>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import logo from '../logo.svg'
+import logo from '../BBlogo.png'
+import SearchForm from './SearchForm'
 
 const Navbar = () => {
   return (
@@ -9,6 +10,7 @@ const Navbar = () => {
         <Link to='/'>
           <img src={logo} alt="" className='logo'/>
         </Link>
+        <SearchForm />
         <ul className='nav-links'>
           <li>
             <Link to='/'>Home</Link>

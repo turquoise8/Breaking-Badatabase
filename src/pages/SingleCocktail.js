@@ -20,6 +20,7 @@ const SingleCocktail = () => {
           
           const {
             char_id,
+            occupation,
             name,
             birthday,
             img,
@@ -29,6 +30,7 @@ const SingleCocktail = () => {
           } = data[0];
           const newCharacter = {
             char_id,
+            occupation,
             name,
             birthday,
             img,
@@ -54,7 +56,7 @@ const SingleCocktail = () => {
     return <h2>No person to display</h2>;
   }
 
-  const {name, birthday, img, nickname, appearance, portrayed } =
+  const {name, birthday, img, nickname, appearance, portrayed, occupation } =
     characters;
 
   return (
@@ -70,6 +72,10 @@ const SingleCocktail = () => {
           <p>
             <span className="drink-data">nickname:</span>
             {nickname}
+          </p>
+          <p>
+            <span className="drink-data">occupation:</span>
+            {occupation.join(', ')}
           </p>
           <p>
             <span className="drink-data">birthday:</span>
