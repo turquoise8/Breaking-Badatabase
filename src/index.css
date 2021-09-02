@@ -73,18 +73,18 @@ img {
   width: 20px;
 }
 
-/* Track */
+
 ::-webkit-scrollbar-track {
   background: var(--mainBackground);
 }
 
-/* Handle */
+
 ::-webkit-scrollbar-thumb {
   background: var(--primaryColor);
   border-radius: 10px;
 }
 
-/* Handle on hover */
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primaryLightColor);
 }
@@ -291,7 +291,7 @@ Error
 }
 /* 
 ====== 
-characters List 
+Characters List 
 ======
 */
 
@@ -410,7 +410,7 @@ Form
 
 /* 
 ====== 
-character
+Character
 ======
 */
 
