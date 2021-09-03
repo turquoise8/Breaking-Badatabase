@@ -8,28 +8,22 @@ const Navbar = () => {
   const searchValue = useRef("");
   const { setSearchTerm } = useGlobalContext();
 
+  const goToHomePage = () => {
+    setSearchTerm("");
+    searchValue.current.value = "";
+    window.scrollTo(0, 0);
+  };
+
   return (
     <nav className="navbar">
       <div className="nav-center">
-        <Link
-          to="/"
-          onClick={() => {
-            setSearchTerm("");
-            searchValue.current.value = "";
-          }}
-        >
+        <Link to="/" onClick={goToHomePage}>
           <img src={logo} alt="" className="logo" />
         </Link>
         <SearchForm searchValue={searchValue} />
         <ul className="nav-links">
           <li>
-            <Link
-              onClick={() => {
-                setSearchTerm("");
-                searchValue.current.value = "";
-              }}
-              to="/"
-            >
+            <Link onClick={goToHomePage} to="/">
               Home
             </Link>
           </li>
