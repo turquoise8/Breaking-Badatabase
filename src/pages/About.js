@@ -11,13 +11,16 @@ const About = () => {
         to check my profiles and offer me a position :&#41;
       </p>
       <section className="icon-section">
-        <a href="#" className="social-icon">
+        <a
+          href="https://github.com/turquoise8/Breaking-Badatabase"
+          className="social-icon"
+        >
           <FaGithub />
         </a>
-        <a href="#" className="social-icon">
-          <FaInstagram />
-        </a>
-        <a href="#" className="social-icon">
+        <a
+          href="https://www.linkedin.com/in/apaydinemre/"
+          className="social-icon"
+        >
           <FaLinkedin />
         </a>
       </section>
