@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useCallback } from "react";
+  import { useCallback } from "react";
 
 const url = "https://www.breakingbadapi.com/api/characters?name=";
 const AppContext = React.createContext();
@@ -15,7 +15,8 @@ const AppProvider = ({ children }) => {
     try {
       const response = await fetch(`${url}${searchTerm}`);
       const data = await response.json();
-  
+      console.log(data)
+      
       if (data) {
         const searchedCharacters = data.map((item) => {
           const { char_id, name, birthday, img, nickname, appearance, portrayed } =
@@ -31,7 +32,6 @@ const AppProvider = ({ children }) => {
           };
         });
         setCharacters(searchedCharacters);
-        console.log(searchedCharacters);
         
       } else {
         setCharacters([]);

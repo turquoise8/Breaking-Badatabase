@@ -7,7 +7,8 @@ import SingleCharacter from "./pages/SingleCharacter";
 import Error from "./pages/Error";
 // import components
 import Navbar from "./components/Navbar";
-import { Footer } from "./components/Footer";
+import {Footer} from "./components/Footer";
+
 function App() {
   return (
     <Router>
